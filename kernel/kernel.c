@@ -7,5 +7,13 @@ void main(){
 	videoPort = 0x0463;
 	setVideoPort(*videoPort);
 	clear_screen();
-	print("Hello World\nHello NewLine/n");
+	int i =0;
+	while(i<100){
+		char str[2];
+		intToStr(i,str);
+		print(str);
+		print("\n");
+		i++;
+	}
+	print("Done!");
 }

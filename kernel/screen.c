@@ -48,7 +48,7 @@ void print_char(char character, int col, int row, char attribute_byte) {
 	two bytes ahead of the current cell */
 	offset += 2;
 	//Adjust for scrolling
-	//offset = handle_scrolling(offset);
+	offset = handle_scrolling(offset);
 	//Update cursor position on the screen device
 	cursor = offset;
 }
