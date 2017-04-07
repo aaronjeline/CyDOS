@@ -24,8 +24,17 @@ void print_at(char* message, int col, int row);
 
 void print(char* message);
 
+void println(char *message);
+
 void clear_screen();
 
 int handle_scrolling(int cursor_offset);
 
 void setVideoPort(int port);
+
+void backspace();
+
+void nudgeCursor(int amnt);
+
+void printHeader(char *text);
+void unsetHeader();

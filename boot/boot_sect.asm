@@ -28,7 +28,7 @@ load_kernel:
 	mov bx, MSG_LOAD_KERNEL ; print message
 	call print_string
 	mov bx, KERNEL_OFFSET ; load parameters for disk_load
-	mov dh, 15
+	mov dh, 30
 	mov dl, [BOOT_DRIVE]
 	call disk_load
 
@@ -46,7 +46,7 @@ BEGIN_PM:
 
 ;Global variables
 BOOT_DRIVE	db 0
-MSG_REAL_MODE	db "Started in 16-bit Real Mode: Press any key to continue... ",0
+MSG_REAL_MODE	db "Welcome to the CYDOS BootLoader, press any key to continue...",0
 MSG_PROT_MODE	db "Successfully landed in 32-bit Protected Mode",0
 MSG_LOAD_KERNEL	db "Loading kernel into memory",0
 
