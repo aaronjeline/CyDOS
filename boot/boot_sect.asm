@@ -28,7 +28,7 @@ load_kernel:
 	mov bx, MSG_LOAD_KERNEL ; print message
 	call print_string
 	mov bx, KERNEL_OFFSET ; load parameters for disk_load
-	mov dh, 30
+	mov dh, 35
 	mov dl, [BOOT_DRIVE]
 	call disk_load
 

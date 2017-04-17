@@ -2,6 +2,7 @@
 #include "util.h" #include "screen.h"
 #include "notepad.h"
 #include "brainfuck.h"
+#include "fstools.h"
 
 /* SHELL SIGNALLING
 0 - no errors, continue
@@ -31,6 +32,7 @@ void builtIn(){
 	println("	bltin: display this list");
 	println("	note: open system notepad");
 	println("	inter: open system interpreter");
+	println("	dir: directory listing");
 	println("	exit: exit the shell");
 }
 
@@ -76,6 +78,9 @@ int handle(char *command){
 		code = 0;
 	}else if(strcmp(prgm,"inter")){
 		brainfuck();
+		code = 0;
+	}else if(strcmp(prgm,"dir")){
+		dir();
 		code = 0;
 	}else{
 		print("No Such Program!\n");

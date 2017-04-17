@@ -78,6 +78,29 @@ int numField(char *message, int bufferLen, int drawWindow){
         return strToInt(buffer);
 }
 
+char charField(char *message, int drawWindow){
+	if(drawWindow){
+		//Window
+	}
+	print(message);
+	print(": ");
+	int gathering = true;
+	char last = getChar(getScancode());
+	while(gathering){
+		char new = getChar(getScancode());
+		if(new!=last){
+			if(new=='\n'){
+				gathering = false;
+			}else if(new!=0){
+				print_char(new,-1,-1,0);
+				backspace();
+			}
+		}
+		last = new;
+	}
+	return last;
+}
+
 void textBuffer(char *line){
         int linePos = 0;
         int running = true;
@@ -134,6 +157,7 @@ void blockUntilKeypress(){
 }
 
 int getSelected(char **options, int numOptions){
+	/*
 	for(int i=0;i<numOptions;i++){
 		char option[4];
 		print(intToStr(i,option));
@@ -158,6 +182,7 @@ int getSelected(char **options, int numOptions){
 		}
 	}
 	return found;
+	*/
 }
 
 

@@ -11,3 +11,5 @@ int yesNo();
 void blockUntilKeypress();
 
 int getSelected(char **options, int optionNum);
+
+char charField(char *message);

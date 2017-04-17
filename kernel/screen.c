@@ -199,6 +199,12 @@ void printHeader(char *text){
 	header = text;
 }
 
+void fillLine(char c){
+	for(int i=0;i<80;i++){
+		print_char(c, -1, -1, 0);
+	}
+}
+
 void unsetHeader(){
 	headerSet = false;
 }

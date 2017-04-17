@@ -3,6 +3,7 @@
 #include "screen.h"
 #include "shell.h"
 #include "input.h"
+#include "filesystem.h"
 
 
 void notepad(){
@@ -15,6 +16,9 @@ void notepad(){
 	clear_screen();
 	print("Save file");
 	if(yesNo()){
+		print_char('\n',-1,-1,0);
+		char name = charField("File Name");
+		createTextFile(name,buffer,bufferSize);
 		print("\n Saving file...");
 		blockUntilKeypress();
 	}

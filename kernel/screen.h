@@ -38,3 +38,4 @@ void nudgeCursor(int amnt);
 
 void printHeader(char *text);
 void unsetHeader();
+void fillLine(char c);
