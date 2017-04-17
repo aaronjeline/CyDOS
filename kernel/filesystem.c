@@ -24,6 +24,7 @@ void createTextFile(char name, char* buffer, int size){
 	}
 	newFile.length = size;
 	newFile.name = name;
+	newFile.type = 't';
 	//Copy the passed buffer into memory
 	int i = 0;
 	while(buffer[i]!=0){

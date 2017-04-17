@@ -14,6 +14,11 @@ all: os-image
 run: all
 	qemu-system-i386 -drive file=os-image,format=raw,index=0,if=floppy 
 
+# Run qemu, open a gdb hook, halt
+debug: all
+	qemu-system-i386 -drive file=os-image,format=raw,index=0,if=floppy -s -S
+	
+
 os-image: boot/boot_sect.bin kernel.bin
 	cat $^ > os-image
 
@@ -21,11 +26,11 @@ os-image: boot/boot_sect.bin kernel.bin
 # - kernel_entry, which jumps to main()
 # - compiled c kernel
 kernel.bin: kernel/kernel_entry.o ${OBJ}
-	ld -o $@ -m elf_i386 -Ttext 0x1000 $^ --oformat binary
+	ld -o $@ -m elf_i386 -Ttext 0x1000 -g $^ --oformat binary
 
 #Generic rule for compiling C code to an object file
 %.o : %.c ${HEADERS}
-	gcc -ffreestanding -m32 -c $< -o $@
+	gcc -ffreestanding -m32 -c -g $< -o $@
 
 #Assemble the kernel_entry
 %.o : %.asm

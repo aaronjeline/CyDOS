@@ -18,7 +18,7 @@ void notepad(){
 	if(yesNo()){
 		print_char('\n',-1,-1,0);
 		char name = charField("File Name");
-		createTextFile(name,buffer,bufferSize);
+		createTextFile('c',buffer,12);
 		print("\n Saving file...");
 		blockUntilKeypress();
 	}
