@@ -14,9 +14,9 @@ void dir(){
 		int length=getLength();
 		int i = 0;
 		while(i!=length){
-			print_char(listing[i].name,-1,-1,0);
+			print(listing[i].name);
 			print("|");
-			print(&(listing[i].type));
+			print(listing[i].type);
 			print_char('\n',-1,-1, 0);
 			i++;
 		}
@@ -24,3 +24,9 @@ void dir(){
 	fillLine('-');
 }
 	
+void cat(char *filename){
+	int length = getFileLength(filename);
+	char buffer[length];
+	getTextFile(filename, buffer);
+	println(buffer);
+}

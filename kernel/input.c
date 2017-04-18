@@ -6,7 +6,7 @@ void textField(char *message, char *buffer, int drawWindow){
         if(drawWindow){
                 //Window stuff
         }
-        if(message[0]==0){
+        if(message[0]!=0){
                 print(message);
                 print(": ");
         }
@@ -86,6 +86,7 @@ char charField(char *message, int drawWindow){
 	print(": ");
 	int gathering = true;
 	char last = getChar(getScancode());
+	char toReturn = 0;
 	while(gathering){
 		char new = getChar(getScancode());
 		if(new!=last){
@@ -94,11 +95,12 @@ char charField(char *message, int drawWindow){
 			}else if(new!=0){
 				print_char(new,-1,-1,0);
 				backspace();
+				toReturn = new;
 			}
 		}
 		last = new;
 	}
-	return last;
+	return toReturn;
 }
 
 void textBuffer(char *line){
