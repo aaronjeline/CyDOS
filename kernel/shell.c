@@ -1,5 +1,6 @@
 #include "shell.h"
-#include "util.h" #include "screen.h"
+#include "util.h" 
+#include "screen.h"
 #include "notepad.h"
 #include "brainfuck.h"
 #include "fstools.h"
@@ -12,15 +13,17 @@
 
 
 int echo(char *text){
-	print(text);
+	println(text);
 	return 0;
 }
 
 void help(){
 	println("CyDOS Interactive Shell Help Page");
-	println("Prorgrams are max 5 characters long");
+	println("Shell commands are comprised of two parts, the program and the arguments");
 	println("Commands are issued as:");
-	println("    <prgm> <args>");
+	println("	<prgm> ?<args>");
+	println("Programs are a max of five characters");
+	println("Arguments are a max of 95 characters");
 	println("To see a list of built in programs, type bltin");
 }
 
@@ -33,6 +36,7 @@ void builtIn(){
 	println("	note: open system notepad");
 	println("	inter: open system interpreter");
 	println("	dir: directory listing");
+	println("	cat: display contents of a text file");
 	println("	exit: exit the shell");
 }
 
@@ -53,11 +57,23 @@ int handle(char *command){
 			j++;
 		}
 	}
-	char args[95];
-	for(int i=spacePos+1;command[i]!=0;i++){
-		args[i]=command[i];
+	char args[20];
+	for(int i=0;i<20;i++){
+		args[i] = 0;
 	}
-	args[length] = 0;
+	seeking = true;
+	int i =0;
+	j++;
+	while(seeking){
+		if(command[j]==0||j==95){
+			seeking = false;
+		}else{
+			args[i]=command[j];
+			i++;j++;
+		}
+	}
+	j--;
+	args[j] = 0;
 	int code;
 	//Check built in tools, then check FS
 	if(strcmp(prgm,"echo")){
