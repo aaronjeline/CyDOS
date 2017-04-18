@@ -1,2 +1,2 @@
 void dir();
-void cat(char *filename);
+int cat(char *filename);

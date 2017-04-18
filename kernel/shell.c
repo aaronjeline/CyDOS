@@ -98,6 +98,8 @@ int handle(char *command){
 	}else if(strcmp(prgm,"dir")){
 		dir();
 		code = 0;
+	}else if(strcmp(prgm,"cat")){
+		code = cat(args);
 	}else{
 		print("No Such Program!\n");
 		code = 0;
@@ -106,7 +108,7 @@ int handle(char *command){
 }
 
 void reportError(int errorCode){
-	print("Program Reproted Error! CODE: ");
+	println("Program Reproted Error! CODE: ");
 	char code[5];
 	print(intToStr(errorCode, code));
 }

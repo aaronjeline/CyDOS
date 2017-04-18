@@ -24,9 +24,17 @@ void dir(){
 	fillLine('-');
 }
 	
-void cat(char *filename){
+int cat(char *filename){
 	int length = getFileLength(filename);
+	if(length==0){
+		print("No such file: ");
+		print(filename);
+		println(".txt");
+		return 2;
+	}
 	char buffer[length];
 	getTextFile(filename, buffer);
 	println(buffer);
+	return 0;
 }
+
