@@ -7,7 +7,7 @@
 
 /* SHELL SIGNALLING
 0 - no errors, continue
-1 - exit prompt
+-1 - exit prompt
 * - report the error code
 */
 
@@ -79,7 +79,7 @@ int handle(char *command){
 	if(strcmp(prgm,"echo")){
 		code = echo(args);
 	}else if(strcmp(prgm,"exit")){
-		code = 1;
+		code = -1;
 	}else if(strcmp(prgm,"cls")){
 		clear_screen();
 		code = 0;
@@ -100,6 +100,8 @@ int handle(char *command){
 		code = 0;
 	}else if(strcmp(prgm,"cat")){
 		code = cat(args);
+	}else if(strcmp(prgm,"del")){
+		code = del(args);
 	}else{
 		print("No Such Program!\n");
 		code = 0;
@@ -108,9 +110,9 @@ int handle(char *command){
 }
 
 void reportError(int errorCode){
-	println("Program Reproted Error! CODE: ");
+	print("Program Reproted Error! CODE: ");
 	char code[5];
-	print(intToStr(errorCode, code));
+	println(intToStr(errorCode, code));
 }
 
 int specialCharHandling(char c){
@@ -174,7 +176,7 @@ void prompt(){
 			int response = handle(line);
 			switch(response){
 			case 0:break;
-			case 1:shouldRun = false;break;
+			case -1:shouldRun = false;break;
 			default:reportError(response);break;
 			}
 		}

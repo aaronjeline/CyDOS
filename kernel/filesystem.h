@@ -11,8 +11,9 @@ struct Directory{
 };
 
 
-void createTextFile(char *name, char *buffer, int size);
+int createTextFile(char *name, char *buffer, int size);
 struct File* getListing();
 int getLength();
 int getFileLength(char *name);
 void getTextFile(char *name, char *buffer);
+int deleteFile(char *name);

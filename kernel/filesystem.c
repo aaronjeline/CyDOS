@@ -13,7 +13,11 @@ void initMainDirectoy(){
 }
 
 
-void createTextFile(char *name, char* buffer, int size){
+int createTextFile(char *name, char* buffer, int size){
+	//Check to see if file already exists
+	if(seekFile(name)!=-1){
+		return 1;
+	}
 	//Create the file & fill out the fields
 	struct File newFile;
 	if(mainDir.length==0){
@@ -33,9 +37,12 @@ void createTextFile(char *name, char* buffer, int size){
 		*(newFile.start + i) = buffer[i];
 		i++;
 	}
+	//Null terminate the file
+	*(newFile.start + (i-1)) = 0;
 	//Update the directories info
 	mainDir.listing[mainDir.length] = newFile;
 	mainDir.length++;
+	return 0;
 }
 
 int getFileLength(char *name){
@@ -74,4 +81,31 @@ struct File* getListing(){
 
 int getLength(){
 	return mainDir.length;
+}
+
+//Returns directory index of named file, returns -1 if no file exists
+int seekFile(char *name){
+	int loc = -1;
+	int i =0;
+	int seeking = true;
+	while(i!=mainDir.length && seeking){
+		if(strcmp(name,mainDir.listing[i].name)){
+			loc = i;
+			seeking = false;
+		}
+		i++;
+	}
+	return loc;
+}
+
+//Delete a file from the directory. Returns 0 if successful, 1 if failure
+int deleteFile(char *name){
+	int file = seekFile(name);
+	if(file==-1){
+		println("No Such File");
+		return 1;
+	}
+	memory_copy(&mainDir.listing[file+1],&mainDir.listing[file],mainDir.length-file);
+	mainDir.length--;
+	return 0;
 }

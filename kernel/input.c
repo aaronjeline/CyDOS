@@ -153,7 +153,10 @@ int yesNo(){
 	
 void blockUntilKeypress(){
 	char start = getChar(getScancode());
-	while(getChar(getScancode())==start||getChar(getScancode())==0){
+	while(getChar(getScancode())==start){
+		//Nothing
+	}
+	while(getChar(getScancode())==0){
 		//Nothing
 	}	
 }

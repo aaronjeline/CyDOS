@@ -38,3 +38,6 @@ int cat(char *filename){
 	return 0;
 }
 
+int del(char *filename){
+	return deleteFile(filename);
+}
