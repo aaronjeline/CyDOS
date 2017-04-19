@@ -16,12 +16,26 @@ void notepad(){
 	clear_screen();
 	print("Save file");
 	if(yesNo()){
-		print_char('\n',-1,-1,0);
-		char fileName[10];
-		textField("File Name", fileName, false);
-		createTextFile(fileName,buffer,bufferSize);
-		print("\n Saving file...");
-		blockUntilKeypress();
+		int done = false;
+		while(!done){
+			print_char('\n',-1,-1,0);
+			char fileName[10];
+			textField("File Name", fileName, false);
+			int status = createTextFile(fileName,buffer,bufferSize);
+			if(status==0){
+				print("\n Saving file...");
+				blockUntilKeypress();
+				done = true;
+			}else{
+				println("File already exists.");
+				println("r: rename file and try again");
+				println("f: force save and overwrite previous file");
+				println("q: quick without saving");
+				switch(charField("")){
+					case 'q':done = true;
+				}
+			}
+	}
 	}
 	unsetHeader();
 	clear_screen();
